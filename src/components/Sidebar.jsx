@@ -1,6 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 
-const Sidebar = () => {
+
+const Sidebar = (props) => { 
+
+
   return (
     <div className='bg-[#f7f8fd] flex flex-col h-screen w-[256px]'>
         <p className='text-[32px] text-[#51459e] font-[600] pt-[10px] px-[15px]'>Nasdaq</p>
