@@ -8,13 +8,15 @@ function App() {
   useEffect(() => {
     fetch("https://data.nasdaq.com/api/v3/datasets/OPEC/ORB.json?api_key=miWaxMW2cCAcstxWyXhs")
         .then(res => res.json())
-        .then(data => console.log(data.dataset.data))
+        .then(data => setAllStocks(data.dataset))
   }, [])
+
+  console.log(allStocks)
  
 
   return (
     <div className="flex h-screen">
-      <Sidebar />
+      <Sidebar allStocks={allStocks} />
       <Graph />
     </div>
   );
