@@ -3,7 +3,7 @@
 
 link: https://stock-app-b4d77.web.app/
 
-This is a website application that lets a user view the history of a the US listed companies in the nasdaq.
+This is a website application that lets a user view the history of a US listed company in the nasdaq.
 Clicking the desired stock on the left pane will load the desired stock history.
 
 ## Available Scripts
