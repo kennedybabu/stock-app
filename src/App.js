@@ -1,37 +1,55 @@
+
 import React, { useEffect, useState } from "react";
 import Graph from "./components/Graph";
 import Sidebar from "./components/Sidebar";
 
+
 function App() {
-  const [allStocks, setAllStocks] = useState([])
+  
+  const [querySearch, setQuerySearch] = useState('FB')
 
-  const [searchCode, setSearchCode] = useState("FB")
-  // https://data.nasdaq.com/api/v3/datasets.json?collapse=annual&rows=6&order=asc&column_index=1&api_key=miWaxMW2cCAcstxWyXhs
-  useEffect(() => {
-    fetch(`https://data.nasdaq.com/api/v3/datasets/WIKI/${searchCode}/data.json?api_key=miWaxMW2cCAcstxWyXhs`)
-        .then(res => res.json())
-        .then(data => setAllStocks(data))        
-  }, [])
+  const usCompanies = ['AAPL', 'MSFT', 'AMZN', 'GOOG', 'TSLA', 'GOOGL', 'NVDA', 'PYPL', 'INTC',
+  'CMCSA', 'ADBE', 'CSCO', 'PEP', 'AVGO', 'TXN', 'TMUS', 'COST', 'QCOM']
+
+  const [stock, setStock] = useState({})
+
+  const [count, setCount] = useState(1)
 
 
-  //function that will trigger search
-  function updateSearch(event) {
-    const {name, value} = event.target
-    setSearchCode(prevState => {
-      return {
-        ...prevState, name: value
-      }
-    })
+  function updateQuery(index, event) {
+    setQuerySearch(usCompanies[index])
+    updateCount()
+  }  
+
+  function getStock(querySearch){
+    const NASDAQ_API_KEY="miWaxMW2cCAcstxWyXhs"   
+
+    fetch(`https://data.nasdaq.com/api/v3/datasets/WIKI/${querySearch}.json?collapse=annual&rows=6&order=asc&column_index=1&api_key=${NASDAQ_API_KEY}`)
+          .then(res => res.json())
+          .then(data => setStock(data))
+  }  
+
+  
+  useEffect(()=> {
+    getStock(querySearch)
+  }, [count])
+
+
+  function updateCount() {
+      setCount(count + 1)
   }
 
 
-  console.log(searchCode)
+  //function that will trigger search
+  function updateSearch(Query, event) {
+    event.preventDefault()    
+  }
   
 
   return (
     <div className="flex h-screen">
-      <Sidebar allStocks={allStocks} searchCode={searchCode} updateSearch={updateSearch}/>
-      <Graph />
+      <Sidebar updateSearch={updateSearch} updateQuery={updateQuery} usCompanies={usCompanies} updateCount={updateCount}/>
+      <Graph stock={stock}/>      
     </div>
   );
 }
