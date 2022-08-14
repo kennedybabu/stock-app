@@ -5,18 +5,18 @@ import StockGraph from './StockGraph'
 
 const Graph = ({stock}) => {
 
-  
-  const data = {
-    labels: stock && stock.dataset && stock.dataset.data.map(item => item[0]),
-    datasets : [
-      {
-        label: stock && stock.dataset && stock.dataset.name,
-        data : stock && stock.dataset && stock.dataset.data.map(item => item[1])
-      }
-    ]
-  } 
 
-  console.log(data) 
+  // const data = {
+  //   labels: stock && stock.dataset && stock.dataset.data.map(item => item[0]),
+  //   datasets : [
+  //     {
+  //       label: stock && stock.dataset && stock.dataset.name,
+  //       data : stock && stock.dataset && stock.dataset.data.map(item => item[1])
+  //     }
+  //   ]
+  // } 
+
+  // console.log(data) 
  
   return (
     <div className='w-full'>
@@ -31,11 +31,11 @@ const Graph = ({stock}) => {
                   <button className='w-[290px] h-[50px] rounded-[10px] text-white text-[18px] font-[500] ml-[32px] bg-[#51459e]'>Jun 5,1998 - Dec 31, 2018</button>
               </div>
           </div>
-          <div className='wrapper w-full h-[82vh] mt-[27px]'>
+          <div className='wrapper w-full h-[80vh] mt-[27px]'>
             <StockGraph />
           </div>
       </div>
-  </div> : <p> one</p>
+  </div> : <p className='pl-4 mt-4'>Loading</p>
 }
 </div>
     

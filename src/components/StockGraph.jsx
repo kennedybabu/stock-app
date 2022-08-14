@@ -25,8 +25,26 @@ function StockGraph({stock}) {
       }
     ]    
   } 
+
+  const options = {
+    title : {
+      display: true,
+      text: 'Line Chart'
+    }, 
+    scales : {
+      yAxes: [
+        {
+          ticks: {
+            min: 0,
+            max: 6,
+            stepSize: 1
+          }
+        }
+      ]
+    }
+  }
     
-  return  <Line data={data}/>
+  return  <Line data={data} options={options}/>
   
 }
 
